@@ -1,0 +1,58 @@
+# Kalkulator Sederhana dengan Python
+
+def tambah(x, y):
+    """Fungsi untuk menjumlahkan dua angka."""
+    return x + y
+
+def kurang(x, y):
+    """Fungsi untuk mengurangi dua angka."""
+    return x - y
+
+def kali(x, y):
+    """Fungsi untuk mengalikan dua angka."""
+    return x * y
+
+def bagi(x, y):
+    """Fungsi untuk membagi dua angka."""
+    if y == 0:
+        return "Error! Pembagian dengan nol tidak diizinkan."  # Menangani pembagian dengan nol
+    else:
+        return x / y
+
+# Main program
+print("Pilih Operasi:")
+print("1. Tambah")
+print("2. Kurang")
+print("3. Kali")
+print("4. Bagi")
+
+while True:
+    try:
+        pilihan = int(input("Masukkan pilihan (1/2/3/4): "))
+
+        if pilihan in (1, 2, 3, 4):
+            num1 = float(input("Masukkan angka pertama: "))
+            num2 = float(input("Masukkan angka kedua: "))
+
+            if pilihan == 1:
+                print(num1, "+", num2, "=", tambah(num1, num2))
+
+            elif pilihan == 2:
+                print(num1, "-", num2, "=", kurang(num1, num2))
+
+            elif pilihan == 3:
+                print(num1, "*", num2, "=", kali(num1, num2))
+
+            elif pilihan == 4:
+                print(num1, "/", num2, "=", bagi(num1, num2))
+
+            # Memeriksa apakah pengguna ingin melakukan perhitungan lagi
+            next_calculation = input("Lanjutkan perhitungan? (ya/tidak): ")
+            if next_calculation == "tidak":
+                break  # Mengakhiri loop jika pengguna tidak ingin melanjutkan
+
+        else:
+            print("Input tidak valid")  # Menangani input pilihan yang tidak valid
+
+    except ValueError:
+        print("Input tidak valid. Masukkan angka yang benar.") #Menangani kesalahan input bukan angka

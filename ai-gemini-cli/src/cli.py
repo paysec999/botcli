@@ -2,13 +2,15 @@ import click
 from ai_gemini.main import main_logic
 
 @click.command()
-@click.argument('command', type=str, required=False)
-@click.option('--options', default='', help='Additional options for the command.')
-def cli(command, options):
+@click.argument('args', nargs=-1)
+def cli(args):
     """Command-line interface for the AI Gemini bot."""
-    if command is None:
-        # If no command provided, default to chat interactive mode
+    if not args:
         command = 'chat'
+        options = ''
+    else:
+        command = args[0]
+        options = ' '.join(args[1:])
     try:
         result = main_logic(command, options)
         click.echo(result)

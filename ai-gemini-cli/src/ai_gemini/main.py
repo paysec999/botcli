@@ -25,7 +25,9 @@ def main_logic(command, options):
         stream_command.execute(options.split() if options else [])
         return "Stream command executed"
     else:
-        return f"Unknown command: {command}"
+        # If unknown command, treat as chat input
+        chat_command.execute([command] + (options.split() if options else []))
+        return "Chat command executed"
 
 def main():
     setup_logger()

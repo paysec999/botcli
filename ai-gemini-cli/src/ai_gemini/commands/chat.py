@@ -329,13 +329,18 @@ Tips: ketik /help atau "exit" untuk keluar"""
                     found_keyword = kw
                     break
             if found_keyword:
-                city = user_input[user_input.lower().find(found_keyword) + len(found_keyword):].strip()
+                city_part = user_input[user_input.lower().find(found_keyword) + len(found_keyword):].strip()
+                # Handle Indonesian "di" preposition
+                if city_part.lower().startswith('di '):
+                    city = city_part[3:].strip()  # Remove "di " and get city
+                else:
+                    city = city_part
                 if not city:
                     city = "Jakarta"
             else:
                 city = "Jakarta"
             response = self.gemini_service.get_weather_info(city)
-            self.display_response(response, f"Cuaca {city.title()}")
+            self.display_response(response, f"Cuaca Di {city.title()}")
             return True
         elif 'rekomendasi' in lower_input or 'recommend' in lower_input:
             # Daily recommendations

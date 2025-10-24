@@ -308,7 +308,18 @@ Format jawaban:
             return {"reply": None, "error": "OpenWeather API key not found. Please set OPENWEATHER_API_KEY in your .env file."}
 
         try:
-            url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric&lang=id"
+            # Handle city with country format like "kuta denpasar" -> "kuta,denpasar"
+            if ' ' in city and ',' not in city:
+                # Assume space separates city and country
+                parts = city.split(' ', 1)
+                if len(parts) == 2:
+                    city_query = f"{parts[0]},{parts[1]}"
+                else:
+                    city_query = city
+            else:
+                city_query = city
+
+            url = f"http://api.openweathermap.org/data/2.5/weather?q={city_query}&appid={api_key}&units=metric&lang=id"
             response = requests.get(url)
             response.raise_for_status()
             data = response.json()
@@ -342,7 +353,7 @@ Format jawaban:
                 emoji = "🌤️"
                 color = "green"
 
-            weather_info = f"""🌤️ **Cuaca di {city} {emoji}**
+            weather_info = f"""🌤️ **Cuaca di {city.title()} {emoji}**
 
 🌡️ **Kondisi:** {weather_desc.capitalize()}
 🌡️ **Suhu:** {temp}°C

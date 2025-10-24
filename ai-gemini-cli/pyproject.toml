@@ -1,13 +1,17 @@
 [tool.poetry]
 name = "ai-gemini-cli"
-version = "0.1.0"
+version = "0.2.0"
 description = "A command-line interface bot using the Gemini API."
-authors = ["Your Name <youremail@example.com>"]
+authors = ["Raditya <dittprabawa@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/yourusername/ai-gemini-cli"
-repository = "https://github.com/yourusername/ai-gemini-cli"
+homepage = "https://github.com/paysec999"
+repository = "https://github.com/paysec999/botcli"
 keywords = ["AI", "CLI", "Gemini", "bot"]
+
+[[tool.poetry.packages]]
+include = "ai_gemini"
+from = "src"
 
 [tool.poetry.dependencies]
 python = "^3.8"
